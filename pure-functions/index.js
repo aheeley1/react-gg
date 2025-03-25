@@ -4,12 +4,17 @@ function addTodo(todo) {
     todos.push(todo);
   }
 
-  // does not create a side effect, but relies on external state from an api
-function getGithubProfile(username) {
-    return fetch(
-      `https://api.github.com/users/${username}`
-    ).then((res) => res.json());
-}
+//   // does not create a side effect, but relies on external state from an api
+//   //unpredictable, promise will not be the same with each invocation
+// function getGithubProfile(username) {
+//     return fetch(
+//       `https://api.github.com/users/${username}`
+//     ).then((res) => res.json());
+// }
+// const p1 = getGithubProfile("tylermcginnis")
+// const p2 = getGithubProfile("tylermcginnis")
+// p1 === p2 // false
+
 
 //does not rely on state outside the fuction but creates a side effect
 function updateDocumentTitle(title) {
@@ -32,3 +37,18 @@ Date.now() // 1665072525093
 const friends = ["Ben", "Lynn", "Alex"]
 friends.push("Jeff") // 4
 friends.push("Jeff") // 5
+
+//expensive function
+const isPrime = (n) => {
+  if(n === 1) {
+    return false;
+  }
+
+  for (let i = 2; i <= Math.sqrt(n); i++)
+  {
+    if (n%i === 0){
+      return false;
+    }
+  }
+  return true;
+}
