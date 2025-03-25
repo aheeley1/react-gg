@@ -38,7 +38,8 @@ const friends = ["Ben", "Lynn", "Alex"]
 friends.push("Jeff") // 4
 friends.push("Jeff") // 5
 
-//expensive function
+//expensive function, but predictable
+//no side effects and always returns the same out for a given input
 const isPrime = (n) => {
   if(n === 1) {
     return false;
@@ -52,3 +53,27 @@ const isPrime = (n) => {
   }
   return true;
 }
+//Because isPrime is predictable, we can cache and reuse the result
+//it doesn't make sense to invoke isPrime more than once for a given number
+//isPrime(997) is always going to return true no matter how many times we run it
+
+let primeCache = {
+  1: false
+}
+
+const isPrimeCached = (n) => {
+    if(typeof primeCache[n] === 'boolean'){
+      return primeCache[n];
+    }
+
+    for (let i = 2; i <= Math.sqrt(n), i++;) {
+       if (i % n === 0) {
+            primeCache[n] = false;
+            return false;
+       }
+    }
+    primeCache[n] = true;
+    return true;
+}
+
+//export default isPrimeCached;
